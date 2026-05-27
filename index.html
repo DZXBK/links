@@ -30,7 +30,7 @@
             text-align: center;
         }
 
-        /* Профиль */
+        /* Профиль (Десктопная версия по умолчанию) */
         .profile {
             margin-bottom: 32px;
         }
@@ -58,6 +58,30 @@
             font-size: 14px;
             color: #9ca3af;
             line-height: 1.5;
+        }
+
+        /* Адаптив для мобильных устройств (перестраиваем профиль в ряд) */
+        @media (max-width: 520px) {
+            .profile {
+                display: flex;
+                align-items: center;
+                text-align: left; /* Выравниваем текст по левому краю в мобильной версии */
+                gap: 20px;        /* Расстояние между аватаркой и текстом */
+                margin-bottom: 28px;
+            }
+            .avatar {
+                margin-bottom: 0; /* Убираем десктопный отступ снизу */
+                width: 84px;       /* Слегка уменьшаем размер, чтобы на мобилке смотрелось аккуратнее */
+                height: 84px;
+                flex-shrink: 0;   /* Защита от сжатия картинки */
+            }
+            .username-main {
+                font-size: 21px;   /* Чуть компактнее шрифт для мобильных */
+                margin-bottom: 4px;
+            }
+            .bio {
+                font-size: 13px;
+            }
         }
 
         /* Стили текстовых разделителей секций */
@@ -164,9 +188,12 @@
         
         <div class="profile">
             <img class="avatar" src="avatar.png" alt="dzxbk">
-            <div class="username-name">Dmitry Bykov</div>
-            <h1 class="username-main">DZXBK</h1>
-            <p class="bio">3D Props & Character Artist</p>
+            <!-- Текстовый блок обернут для корректной работы флексов на мобилке -->
+            <div class="profile-text">
+                <div class="username-name">Dmitry Bykov</div>
+                <h1 class="username-main">DZXBK</h1>
+                <p class="bio">3D Props & Character Artist</p>
+            </div>
         </div>
 
         <div class="section-title">• How to contact me •</div>
@@ -245,22 +272,23 @@
         <div class="links-grid">
             <a href="https://t.me/dzxbk_art" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-tg.svg" alt="">
-                <span class="link-btn-text">TG Channel</span>
-                </a>
+                <span class="link-btn-text">Telegram Channel</span>
+            </a>
 
             <a href="https://x.com/dzx_bk" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-x.svg" alt="">
                 <span class="link-btn-text">Twitter</span>
-                </a>
+            </a>
 
             <a href="https://www.instagram.com/dzx_bk" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-instagram.svg" alt="">
                 <span class="link-btn-text">Instagram</span>
-                </a>
+            </a>
         </div>
 
     </div>
 
+    <!-- Скрипт плавного 2D-затухания подсветки (X: 350px, Y: 100px) -->
     <script>
         let mouseX = null;
         let mouseY = null;
@@ -287,7 +315,6 @@
                 const currentX = (isPC && mouseX !== null) ? mouseX : viewportCenterX;
                 const currentY = (isPC && mouseY !== null) ? mouseY : viewportCenterY;
                 
-                // 1. Расчет по вертикали (Y)
                 let distanceY = 0;
                 if (currentY < sectionTop) {
                     distanceY = sectionTop - currentY;
@@ -300,7 +327,6 @@
                 if (ratioY < 0) ratioY = 0;
                 if (ratioY > 1) ratioY = 1;
 
-                // 2. Расчет по горизонтали (X)
                 let distanceX = 0;
                 if (currentX < sectionLeft) {
                     distanceX = sectionLeft - currentX;
