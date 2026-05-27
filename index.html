@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="favicon.png">
 
     <style>
-        /* Общие стили и системный шрифт, полностью аналогичные оригиналу */
+        /* Общие стили и системный шрифт */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -70,10 +70,10 @@
             margin-top: 24px;
             margin-bottom: 12px;
             text-align: center;
-            transition: color 0.3s ease; /* Обеспечивает текучесть цвета */
+            transition: color 0.3s ease;
         }
 
-        /* Списки кнопок внутри секций */
+        /* Списки кнопок внутри стандартных секций */
         .links-group {
             display: flex;
             flex-direction: column;
@@ -104,6 +104,10 @@
                         transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             position: relative;
             width: 100%;
+            
+            /* Фиксы для мобильных устройств */
+            -webkit-tap-highlight-color: transparent; 
+            outline: none;                            
         }
         
         /* Квадратное SVG изображение (20х20px) */
@@ -242,17 +246,17 @@
             <a href="https://t.me/dzxbk_art" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-tg.svg" alt="">
                 <span class="link-btn-text">TG Channel</span>
-            </a>
+                </a>
 
             <a href="https://x.com/dzx_bk" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-x.svg" alt="">
                 <span class="link-btn-text">Twitter</span>
-            </a>
+                </a>
 
             <a href="https://www.instagram.com/dzx_bk" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-instagram.svg" alt="">
                 <span class="link-btn-text">Instagram</span>
-            </a>
+                </a>
         </div>
 
     </div>
@@ -261,7 +265,6 @@
         let mouseX = null;
         let mouseY = null;
         
-        // Определяем ПК-устройство
         const isPC = window.matchMedia('(pointer: fine)').matches;
 
         function updateSectionHighlights() {
@@ -276,48 +279,42 @@
                 const titleRect = title.getBoundingClientRect();
                 const nextRect = nextElem.getBoundingClientRect();
                 
-                // Геометрические границы секции
                 const sectionTop = titleRect.top;
                 const sectionBottom = nextRect.bottom;
                 const sectionLeft = nextRect.left;
                 const sectionRight = nextRect.right;
                 
-                // Текущие координаты (мышь для десктопа, центр экрана для мобильных)
                 const currentX = (isPC && mouseX !== null) ? mouseX : viewportCenterX;
                 const currentY = (isPC && mouseY !== null) ? mouseY : viewportCenterY;
                 
-                // 1. РАСЧЁТ ПО ВЕРТИКАЛИ (Теперь плавный!)
+                // 1. Расчет по вертикали (Y)
                 let distanceY = 0;
                 if (currentY < sectionTop) {
-                    distanceY = sectionTop - currentY; // Курсор выше секции
+                    distanceY = sectionTop - currentY;
                 } else if (currentY > sectionBottom) {
-                    distanceY = currentY - sectionBottom; // Курсор ниже секции
+                    distanceY = currentY - sectionBottom;
                 }
                 
-                // Расстояние в PX сверху и снизу, в пределах которого цвет угасает
-                const maxDistanceY = 100; 
+                const maxDistanceY = 100;
                 let ratioY = 1 - (distanceY / maxDistanceY);
                 if (ratioY < 0) ratioY = 0;
                 if (ratioY > 1) ratioY = 1;
 
-                // 2. РАСЧЁТ ПО ГОРИЗОНТАЛИ
+                // 2. Расчет по горизонтали (X)
                 let distanceX = 0;
                 if (currentX < sectionLeft) {
-                    distanceX = sectionLeft - currentX; // Курсор левее секции
+                    distanceX = sectionLeft - currentX;
                 } else if (currentX > sectionRight) {
-                    distanceX = currentX - sectionRight; // Курсор правее секции
+                    distanceX = currentX - sectionRight;
                 }
                 
-                // Расстояние в PX по бокам для затухания
-                const maxDistanceX = 350; 
+                const maxDistanceX = 350;
                 let ratioX = 1 - (distanceX / maxDistanceX);
                 if (ratioX < 0) ratioX = 0;
                 if (ratioX > 1) ratioX = 1;
 
-                // Итоговый плавный коэффициент (перемножение осей)
                 const ratio = ratioX * ratioY;
                 
-                // Палитра (Базовый: #4b5563 (75, 85, 99) -> Пиковый приглушенный: (120, 128, 138))
                 const maxR = 120;
                 const maxG = 128;
                 const maxB = 138;
@@ -330,7 +327,6 @@
             });
         }
 
-        // Ловим мышь только на десктопах
         if (isPC) {
             window.addEventListener('mousemove', (e) => {
                 mouseX = e.clientX;
@@ -339,12 +335,10 @@
             });
         }
 
-        // События интерфейса
         window.addEventListener('scroll', updateSectionHighlights);
         window.addEventListener('resize', updateSectionHighlights);
         document.addEventListener('DOMContentLoaded', updateSectionHighlights);
         
-        // Стартовый запуск
         updateSectionHighlights();
     </script>
 
