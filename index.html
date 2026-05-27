@@ -80,6 +80,14 @@
             margin-bottom: 12px;
         }
 
+        /* Двухколоночная сетка для последней секции */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
         /* Кнопка-ссылка */
         .link-btn {
             display: flex;
@@ -115,6 +123,9 @@
             font-weight: 600;
             text-align: left;
             letter-spacing: -0.01em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         /* Стрелочка, прижатая к правому краю */
@@ -123,7 +134,7 @@
             width: 16px;
             height: 16px;
             object-fit: contain;
-            filter: invert(1); /* Инверсия цвета для стрелочки */
+            filter: invert(1); 
             transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
@@ -148,7 +159,7 @@
         
         <div class="profile">
             <img class="avatar" src="avatar.png" alt="dzxbk">
-            <div class="username-name">Дмитрий Быков</div>
+            <div class="username-name">Dmitry Bykov</div>
             <h1 class="username-main">DZXBK</h1>
             <p class="bio">3D Props & Character Artist</p>
         </div>
@@ -221,6 +232,27 @@
             <a href="https://www.turbosquid.com/Search/Artists/Dmitrii-Bykov" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-turbosquid.svg" alt="">
                 <span class="link-btn-text">TurboSquid</span>
+                <img class="link-btn-arrow" src="arrow.svg" alt="">
+            </a>
+        </div>
+
+        <div class="section-title">• Other Socials •</div>
+        <div class="links-grid">
+            <a href="https://t.me/dzxbk_art" class="link-btn" target="_blank" rel="noopener">
+                <img class="link-btn-img" src="btn-tg.svg" alt="">
+                <span class="link-btn-text">TG Channel</span>
+                <img class="link-btn-arrow" src="arrow.svg" alt="">
+            </a>
+
+            <a href="https://x.com/dzx_bk" class="link-btn" target="_blank" rel="noopener">
+                <img class="link-btn-img" src="btn-x.svg" alt="">
+                <span class="link-btn-text">Twitter</span>
+                <img class="link-btn-arrow" src="arrow.svg" alt="">
+            </a>
+
+            <a href="https://www.instagram.com/dzx_bk" class="link-btn" target="_blank" rel="noopener">
+                <img class="link-btn-img" src="btn-instagram.svg" alt="">
+                <span class="link-btn-text">Instagram</span>
                 <img class="link-btn-arrow" src="arrow.svg" alt="">
             </a>
         </div>
