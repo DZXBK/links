@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dzxbk | Links</title>
     
-    <!-- ФАВИКОН -->
     <link rel="icon" type="image/png" href="favicon.png">
 
     <style>
@@ -53,7 +52,7 @@
             font-size: 24px;
             font-weight: 700;
             margin-bottom: 8px;
-            letter-spacing: 0.05em; /* Adjusted: added more spacing between letters */
+            letter-spacing: 0.05em;
         }
         .bio {
             font-size: 14px;
@@ -121,9 +120,10 @@
         /* Стрелочка, прижатая к правому краю */
         .link-btn-arrow {
             margin-left: auto; 
-            padding-right: 4px;
-            font-size: 16px;
-            color: #9ca3af; 
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+            filter: invert(1); /* Инверсия цвета для стрелочки */
             transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
@@ -146,7 +146,6 @@
 
     <div class="container">
         
-        <!-- Секция профиля -->
         <div class="profile">
             <img class="avatar" src="avatar.png" alt="dzxbk">
             <div class="username-name">Дмитрий Быков</div>
@@ -154,89 +153,75 @@
             <p class="bio">3D Props & Character Artist</p>
         </div>
 
-        <!-- Первая секция контактов -->
         <div class="section-title">• How to contact me •</div>
         <div class="links-group">
-            <!-- Почта -->
             <a href="mailto:dzxbk.mail@gmail.com" class="link-btn">
                 <img class="link-btn-img" src="btn-email.svg" alt="">
                 <span class="link-btn-text">Contact Email</span>
-                <span class="link-btn-arrow">→</span>
+                <img class="link-btn-arrow" src="arrow.svg" alt="">
             </a>
 
-            <!-- Телеграм -->
-            <a href="https://t.me" class="link-btn" target="_blank" rel="noopener">
+            <a href="https://t.me/dzxbk" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-tg.svg" alt="">
                 <span class="link-btn-text">Telegram</span>
-                <span class="link-btn-arrow">→</span>
+                <img class="link-btn-arrow" src="arrow.svg" alt="">
             </a>
         </div>
 
-        <!-- Вторая секция портфолио -->
         <div class="section-title">• Portfolio •</div>
         <div class="links-group">
-            <!-- Резюме -->
-            <a href="https://artstation.com" class="link-btn" target="_blank" rel="noopener">
+            <a href="https://dzxbk.artstation.com/resume" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-resume.svg" alt="">
                 <span class="link-btn-text">Resume</span>
-                <span class="link-btn-arrow">→</span>
+                <img class="link-btn-arrow" src="arrow.svg" alt="">
             </a>
 
-            <!-- Artstation -->
-            <a href="https://artstation.com" class="link-btn" target="_blank" rel="noopener">
+            <a href="https://artstation.com/dzxbk" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-art.svg" alt="">
                 <span class="link-btn-text">Artstation</span>
-                <span class="link-btn-arrow">→</span>
+                <img class="link-btn-arrow" src="arrow.svg" alt="">
             </a>
 
-            <!-- YouTube -->
-            <a href="https://youtube.com" class="link-btn" target="_blank" rel="noopener">
+            <a href="https://youtube.com/@dzxbk" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-yt.svg" alt="">
                 <span class="link-btn-text">YouTube</span>
-                <span class="link-btn-arrow">→</span>
+                <img class="link-btn-arrow" src="arrow.svg" alt="">
             </a>
 
-            <!-- Twitch -->
-            <a href="https://twitch.tv" class="link-btn" target="_blank" rel="noopener">
+            <a href="https://twitch.tv/dzxbk" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-twitch.svg" alt="">
                 <span class="link-btn-text">Twitch</span>
-                <span class="link-btn-arrow">→</span>
+                <img class="link-btn-arrow" src="arrow.svg" alt="">
             </a>
         </div>
 
-        <!-- Третья секция фриланса -->
         <div class="section-title">• Freelance •</div>
         <div class="links-group">
-            <!-- Fiverr -->
-            <a href="https://fiverr.com" class="link-btn" target="_blank" rel="noopener">
+            <a href="https://fiverr.com/poly_counter" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-fiverr.svg" alt="">
                 <span class="link-btn-text">Fiverr</span>
-                <span class="link-btn-arrow">→</span>
+                <img class="link-btn-arrow" src="arrow.svg" alt="">
             </a>
         </div>
 
-        <!-- Четвертая секция маркетплейсов -->
         <div class="section-title">• Marketplaces •</div>
         <div class="links-group">
-            <!-- Gumroad -->
-            <a href="https://gumroad.com" class="link-btn" target="_blank" rel="noopener">
+            <a href="https://dzxbk.gumroad.com/" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-gumroad.svg" alt="">
                 <span class="link-btn-text">Gumroad</span>
-                <span class="link-btn-arrow">→</span>
+                <img class="link-btn-arrow" src="arrow.svg" alt="">
             </a>
 
-            <!-- Sketchfab -->
-            <a href="https://sketchfab.com" class="link-btn" target="_blank" rel="noopener">
+            <a href="https://sketchfab.com/dzxbk" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-sketchfab.svg" alt="">
                 <span class="link-btn-text">Sketchfab</span>
-                <span class="link-btn-arrow">→</span>
+                <img class="link-btn-arrow" src="arrow.svg" alt="">
             </a>
 
-            <!-- TurboSquid -->
-            <a href="https://turbosquid.com" class="link-btn" target="_blank" rel="noopener">
+            <a href="https://www.turbosquid.com/Search/Artists/Dmitrii-Bykov" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-turbosquid.svg" alt="">
                 <span class="link-btn-text">TurboSquid</span>
-                <span class="link-btn-arrow">→</span>
+                <img class="link-btn-arrow" src="arrow.svg" alt="">
             </a>
         </div>
 
