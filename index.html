@@ -70,6 +70,7 @@
             margin-top: 24px;
             margin-bottom: 12px;
             text-align: center;
+            transition: color 0.2s ease; /* Плавное изменение цвета при скролле */
         }
 
         /* Списки кнопок внутри секций */
@@ -111,7 +112,7 @@
             height: 20px;
             border-radius: 4px;
             object-fit: contain; 
-            margin-right: 20px; /* Вернули отступ обратно к 20px */
+            margin-right: 20px; 
             flex-shrink: 0;
             filter: invert(1); 
             transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
@@ -159,8 +160,8 @@
         
         <div class="profile">
             <img class="avatar" src="avatar.png" alt="dzxbk">
-            <h1 class="username-main">DZXBK</h1>
             <div class="username-name">Dmitry Bykov</div>
+            <h1 class="username-main">DZXBK</h1>
             <p class="bio">3D Props & Character Artist</p>
         </div>
 
@@ -241,20 +242,68 @@
             <a href="https://t.me/dzxbk_art" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-tg.svg" alt="">
                 <span class="link-btn-text">TG Channel</span>
-                </a>
+            </a>
 
             <a href="https://x.com/dzx_bk" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-x.svg" alt="">
                 <span class="link-btn-text">Twitter</span>
-                </a>
+            </a>
 
             <a href="https://www.instagram.com/dzx_bk" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-instagram.svg" alt="">
                 <span class="link-btn-text">Instagram</span>
-                </a>
+            </a>
         </div>
 
     </div>
+
+    <!-- Скрипт для подсветки активной секции при скролле -->
+    <script>
+        function updateSectionHighlights() {
+            const viewportCenter = window.innerHeight / 2;
+            const titles = document.querySelectorAll('.section-title');
+            
+            titles.forEach(title => {
+                const nextElem = title.nextElementSibling;
+                if (!nextElem) return;
+                
+                const titleRect = title.getBoundingClientRect();
+                const nextRect = nextElem.getBoundingClientRect();
+                
+                // Вычисляем границы всей секции целиком (заголовок + блок с кнопками)
+                const sectionTop = titleRect.top;
+                const sectionBottom = nextRect.bottom;
+                const sectionHeight = sectionBottom - sectionTop;
+                const sectionCenter = sectionTop + sectionHeight / 2;
+                
+                // Расстояние от центра секции до центра экрана
+                const distance = Math.abs(viewportCenter - sectionCenter);
+                
+                // Максимальный радиус работы эффекта (половина высоты экрана)
+                const maxDistance = window.innerHeight / 2;
+                
+                // Процент близости к центру (от 0 до 1)
+                let ratio = 1 - (distance / maxDistance);
+                if (ratio < 0) ratio = 0;
+                if (ratio > 1) ratio = 1;
+                
+                // Плавно переливаем цвет от #4b5563 (75, 85, 99) до #ffffff (255, 255, 255)
+                const r = Math.round(75 + (255 - 75) * ratio);
+                const g = Math.round(85 + (255 - 85) * ratio);
+                const b = Math.round(99 + (255 - 99) * ratio);
+                
+                title.style.color = `rgb(${r}, ${g}, ${b})`;
+            });
+        }
+
+        // Запуск при скролле, изменении размеров окна и загрузке страницы
+        window.addEventListener('scroll', updateSectionHighlights);
+        window.addEventListener('resize', updateSectionHighlights);
+        document.addEventListener('DOMContentLoaded', updateSectionHighlights);
+        
+        // Моментальный вызов для инициализации
+        updateSectionHighlights();
+    </script>
 
 </body>
 </html>
