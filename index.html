@@ -70,7 +70,7 @@
             margin-top: 24px;
             margin-bottom: 12px;
             text-align: center;
-            transition: color 0.2s ease; /* Мягкое сглаживание любых изменений цвета */
+            transition: color 0.2s ease; /* Мягкое сглаживание переходов цвета */
         }
 
         /* Списки кнопок внутри секций */
@@ -307,10 +307,15 @@
                     if (ratio > 1) ratio = 1;
                 }
                 
-                // Смешивание цветов от базового #4b5563 (75, 85, 99) до активного #ffffff (255, 255, 255)
-                const r = Math.round(75 + (255 - 75) * ratio);
-                const g = Math.round(85 + (255 - 85) * ratio);
-                const b = Math.round(99 + (255 - 99) * ratio);
+                // Рассчитываем цвет. Базовый: #4b5563 (75, 85, 99). 
+                // Сделали пиковое значение еще ближе к базовому для максимальной деликатности эффекта.
+                const maxR = 120;
+                const maxG = 128;
+                const maxB = 138;
+
+                const r = Math.round(75 + (maxR - 75) * ratio);
+                const g = Math.round(85 + (maxG - 85) * ratio);
+                const b = Math.round(99 + (maxB - 99) * ratio);
                 
                 title.style.color = `rgb(${r}, ${g}, ${b})`;
             });
@@ -330,7 +335,7 @@
         window.addEventListener('resize', updateSectionHighlights);
         document.addEventListener('DOMContentLoaded', updateSectionHighlights);
         
-        // Быстрый запуск для инициализации цветов
+        // Первичный запуск для инициализации цветов
         updateSectionHighlights();
     </script>
 
