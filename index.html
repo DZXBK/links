@@ -70,7 +70,7 @@
             margin-top: 24px;
             margin-bottom: 12px;
             text-align: center;
-            transition: color 0.2s ease; /* Мягкое сглаживание переходов цвета */
+            transition: color 0.3s ease; /* Обеспечивает текучесть цвета */
         }
 
         /* Списки кнопок внутри секций */
@@ -276,39 +276,48 @@
                 const titleRect = title.getBoundingClientRect();
                 const nextRect = nextElem.getBoundingClientRect();
                 
-                // Границы текущей секции
+                // Геометрические границы секции
                 const sectionTop = titleRect.top;
                 const sectionBottom = nextRect.bottom;
                 const sectionLeft = nextRect.left;
                 const sectionRight = nextRect.right;
                 
-                // Текущие координаты (мышь для ПК, центр экрана для мобильных)
+                // Текущие координаты (мышь для десктопа, центр экрана для мобильных)
                 const currentX = (isPC && mouseX !== null) ? mouseX : viewportCenterX;
                 const currentY = (isPC && mouseY !== null) ? mouseY : viewportCenterY;
                 
-                let ratio = 0; // По умолчанию секция выключена (0)
-                
-                // 1. Проверяем строгое нахождение по вертикали
-                if (currentY >= sectionTop && currentY <= sectionBottom) {
-                    
-                    // 2. Если по вертикали попали, рассчитываем расстояние по горизонтали
-                    let distanceX = 0;
-                    if (currentX < sectionLeft) {
-                        distanceX = sectionLeft - currentX; // Курсор левее секции
-                    } else if (currentX > sectionRight) {
-                        distanceX = currentX - sectionRight; // Курсор правее секции
-                    }
-                    
-                    // Расстояние в пикселях по бокам, в пределах которого заголовок плавно гаснет
-                    const maxDistanceX = 150; 
-                    
-                    ratio = 1 - (distanceX / maxDistanceX);
-                    if (ratio < 0) ratio = 0;
-                    if (ratio > 1) ratio = 1;
+                // 1. РАСЧЁТ ПО ВЕРТИКАЛИ (Теперь плавный!)
+                let distanceY = 0;
+                if (currentY < sectionTop) {
+                    distanceY = sectionTop - currentY; // Курсор выше секции
+                } else if (currentY > sectionBottom) {
+                    distanceY = currentY - sectionBottom; // Курсор ниже секции
                 }
                 
-                // Рассчитываем цвет. Базовый: #4b5563 (75, 85, 99). 
-                // Сделали пиковое значение еще ближе к базовому для максимальной деликатности эффекта.
+                // Расстояние в PX сверху и снизу, в пределах которого цвет угасает
+                const maxDistanceY = 100; 
+                let ratioY = 1 - (distanceY / maxDistanceY);
+                if (ratioY < 0) ratioY = 0;
+                if (ratioY > 1) ratioY = 1;
+
+                // 2. РАСЧЁТ ПО ГОРИЗОНТАЛИ
+                let distanceX = 0;
+                if (currentX < sectionLeft) {
+                    distanceX = sectionLeft - currentX; // Курсор левее секции
+                } else if (currentX > sectionRight) {
+                    distanceX = currentX - sectionRight; // Курсор правее секции
+                }
+                
+                // Расстояние в PX по бокам для затухания
+                const maxDistanceX = 350; 
+                let ratioX = 1 - (distanceX / maxDistanceX);
+                if (ratioX < 0) ratioX = 0;
+                if (ratioX > 1) ratioX = 1;
+
+                // Итоговый плавный коэффициент (перемножение осей)
+                const ratio = ratioX * ratioY;
+                
+                // Палитра (Базовый: #4b5563 (75, 85, 99) -> Пиковый приглушенный: (120, 128, 138))
                 const maxR = 120;
                 const maxG = 128;
                 const maxB = 138;
@@ -321,7 +330,7 @@
             });
         }
 
-        // Ловим движение мыши только на десктопах
+        // Ловим мышь только на десктопах
         if (isPC) {
             window.addEventListener('mousemove', (e) => {
                 mouseX = e.clientX;
@@ -330,12 +339,12 @@
             });
         }
 
-        // Обработка скролла и изменения размеров окна
+        // События интерфейса
         window.addEventListener('scroll', updateSectionHighlights);
         window.addEventListener('resize', updateSectionHighlights);
         document.addEventListener('DOMContentLoaded', updateSectionHighlights);
         
-        // Первичный запуск для инициализации цветов
+        // Стартовый запуск
         updateSectionHighlights();
     </script>
 
