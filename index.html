@@ -47,7 +47,7 @@
             font-weight: 500;
             color: #9ca3af;
             margin-bottom: 2px;
-        }
+            }
         .username-main {
             font-size: 24px;
             font-weight: 700;
@@ -80,10 +80,10 @@
             margin-bottom: 12px;
         }
 
-        /* Двухколоночная сетка для последней секции */
+        /* Двухколоночная сетка для последней секции (строго 50/50) */
         .links-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 12px;
             margin-bottom: 12px;
         }
@@ -117,7 +117,7 @@
             transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Контейнер для текста ссылки */
+        /* Контейнер для текста ссылки с защитой от переполнения */
         .link-btn-text {
             font-size: 15px;
             font-weight: 600;
