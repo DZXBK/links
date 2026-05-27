@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dzxbk | Links</title>
+    
+    <!-- ФАВИКОН -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <style>
+        /* Общие стили и системный шрифт, полностью аналогичные оригиналу */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #0d0e12;
+            color: #ffffff;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .container {
+            width: 100%;
+            max-width: 512px; 
+            text-align: center;
+        }
+
+        /* Профиль */
+        .profile {
+            margin-bottom: 32px;
+        }
+        .avatar {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #23262f;
+            margin-bottom: 16px;
+        }
+        .username-name {
+            font-size: 16px;
+            font-weight: 500;
+            color: #9ca3af;
+            margin-bottom: 2px;
+        }
+        .username-main {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: 0.05em; /* Adjusted: added more spacing between letters */
+        }
+        .bio {
+            font-size: 14px;
+            color: #9ca3af;
+            line-height: 1.5;
+        }
+
+        /* Стили текстовых разделителей секций */
+        .section-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #4b5563; 
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        /* Списки кнопок внутри секций */
+        .links-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        /* Кнопка-ссылка */
+        .link-btn {
+            display: flex;
+            align-items: center;
+            background-color: #181920;
+            border: 1px solid #23262f;
+            border-radius: 12px;
+            padding: 14px 16px; 
+            color: #ffffff;
+            text-decoration: none;
+            transition: background-color 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                        border-color 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                        transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative;
+            width: 100%;
+        }
+        
+        /* Квадратное SVG изображение (20х20px) */
+        .link-btn-img {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            object-fit: contain; 
+            margin-right: 20px; 
+            flex-shrink: 0;
+            filter: invert(1); 
+            transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Контейнер для текста ссылки */
+        .link-btn-text {
+            font-size: 15px;
+            font-weight: 600;
+            text-align: left;
+            letter-spacing: -0.01em;
+        }
+
+        /* Стрелочка, прижатая к правому краю */
+        .link-btn-arrow {
+            margin-left: auto; 
+            padding-right: 4px;
+            font-size: 16px;
+            color: #9ca3af; 
+            transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Эффекты ховера */
+        .link-btn:hover {
+            background-color: #1c1d26;
+            border-color: #3b3f4e;
+            transform: scale(1.006); 
+        }
+
+        .link-btn:hover .link-btn-img {
+            opacity: 0.4; 
+        }
+        .link-btn:hover .link-btn-arrow {
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Секция профиля -->
+        <div class="profile">
+            <img class="avatar" src="avatar.png" alt="dzxbk">
+            <div class="username-name">Дмитрий Быков</div>
+            <h1 class="username-main">DZXBK</h1>
+            <p class="bio">3D Props & Character Artist</p>
+        </div>
+
+        <!-- Первая секция контактов -->
+        <div class="section-title">• How to contact me •</div>
+        <div class="links-group">
+            <!-- Почта -->
+            <a href="mailto:dzxbk.mail@gmail.com" class="link-btn">
+                <img class="link-btn-img" src="btn-email.svg" alt="">
+                <span class="link-btn-text">Contact Email</span>
+                <span class="link-btn-arrow">→</span>
+            </a>
+
+            <!-- Телеграм -->
+            <a href="https://t.me" class="link-btn" target="_blank" rel="noopener">
+                <img class="link-btn-img" src="btn-tg.svg" alt="">
+                <span class="link-btn-text">Telegram</span>
+                <span class="link-btn-arrow">→</span>
+            </a>
+        </div>
+
+        <!-- Вторая секция портфолио -->
+        <div class="section-title">• Portfolio •</div>
+        <div class="links-group">
+            <!-- Резюме -->
+            <a href="https://artstation.com" class="link-btn" target="_blank" rel="noopener">
+                <img class="link-btn-img" src="btn-resume.svg" alt="">
+                <span class="link-btn-text">Resume</span>
+                <span class="link-btn-arrow">→</span>
+            </a>
+
+            <!-- Artstation -->
+            <a href="https://artstation.com" class="link-btn" target="_blank" rel="noopener">
+                <img class="link-btn-img" src="btn-art.svg" alt="">
+                <span class="link-btn-text">Artstation</span>
+                <span class="link-btn-arrow">→</span>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://youtube.com" class="link-btn" target="_blank" rel="noopener">
+                <img class="link-btn-img" src="btn-yt.svg" alt="">
+                <span class="link-btn-text">YouTube</span>
+                <span class="link-btn-arrow">→</span>
+            </a>
+
+            <!-- Twitch -->
+            <a href="https://twitch.tv" class="link-btn" target="_blank" rel="noopener">
+                <img class="link-btn-img" src="btn-twitch.svg" alt="">
+                <span class="link-btn-text">Twitch</span>
+                <span class="link-btn-arrow">→</span>
+            </a>
+        </div>
+
+        <!-- Третья секция фриланса -->
+        <div class="section-title">• Freelance •</div>
+        <div class="links-group">
+            <!-- Fiverr -->
+            <a href="https://fiverr.com" class="link-btn" target="_blank" rel="noopener">
+                <img class="link-btn-img" src="btn-fiverr.svg" alt="">
+                <span class="link-btn-text">Fiverr</span>
+                <span class="link-btn-arrow">→</span>
+            </a>
+        </div>
+
+        <!-- Четвертая секция маркетплейсов -->
+        <div class="section-title">• Marketplaces •</div>
+        <div class="links-group">
+            <!-- Gumroad -->
+            <a href="https://gumroad.com" class="link-btn" target="_blank" rel="noopener">
+                <img class="link-btn-img" src="btn-gumroad.svg" alt="">
+                <span class="link-btn-text">Gumroad</span>
+                <span class="link-btn-arrow">→</span>
+            </a>
+
+            <!-- Sketchfab -->
+            <a href="https://sketchfab.com" class="link-btn" target="_blank" rel="noopener">
+                <img class="link-btn-img" src="btn-sketchfab.svg" alt="">
+                <span class="link-btn-text">Sketchfab</span>
+                <span class="link-btn-arrow">→</span>
+            </a>
+
+            <!-- TurboSquid -->
+            <a href="https://turbosquid.com" class="link-btn" target="_blank" rel="noopener">
+                <img class="link-btn-img" src="btn-turbosquid.svg" alt="">
+                <span class="link-btn-text">TurboSquid</span>
+                <span class="link-btn-arrow">→</span>
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>
