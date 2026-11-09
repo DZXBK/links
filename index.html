@@ -14,19 +14,94 @@
             margin: 0;
             padding: 0;
         }
+        /* Палитра — меняется здесь */
+        :root {
+            --page-bg: #0d0e12;
+            --page-glow: #1a1c26;
+
+            --frame-bg: #15161d;
+            --frame-opacity: 0.95;
+            --frame-radius: 20px;
+            --frame-shadow: 0 4px 10px rgba(0, 0, 0, 0.08),
+                            0 14px 56px rgba(0, 0, 0, 0.10);
+            --avatar-shadow: 0 1px 3px rgba(0, 0, 0, 0.16),
+                             0 3px 8px rgba(0, 0, 0, 0.12);
+
+            --btn-bg: #1e202a;
+            --btn-bg-hover: #252833;
+            --btn-border: #2a2d38;
+            --btn-border-hover: #3b3f4e;
+
+            --ink: #ffffff;
+            --ink-muted: #9ca3af;
+        }
+
+        html {
+            background-color: var(--page-bg);
+        }
+
         body {
-            background-color: #0d0e12;
-            color: #ffffff;
+            background-color: transparent;
+            color: var(--ink);
             font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            display: flex;
-            justify-content: center;
-            padding: 40px 20px;
+            min-height: 100vh;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        .container {
+
+        /* Фон: свечение + дизеринг. Один фиксированный слой, растеризуется один раз. */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-color: var(--page-bg);
+            background-image:
+                url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAPElEQVR42gXBgRECQAwCsMCf+y+sxSSrmSrmivg4J37UPEMdkvGcCCYVxVNnLntm4PlqTVBxPhSH83D2B3iZGxhzlSAXAAAAAElFTkSuQmCC"),
+                radial-gradient(ellipse 1200px 620px at 50% -12%, var(--page-glow) 0%, var(--page-bg) 62%);
+            background-repeat: repeat, no-repeat;
+            background-position: 0 0, 50% 0;
+            background-size: 8px 8px, 100% 780px;
+            image-rendering: pixelated;
+        }
+
+        /* Каркас страницы */
+        .frame {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
             width: 100%;
-            max-width: 512px; 
+            min-height: 100vh;
+        }
+
+        /* Главная рамка: фон и скругление живут на ::before */
+        .frame-inner {
+            position: relative;
+            width: 600px;
+            max-width: calc(100% - 32px);
+            min-width: 0;
+            margin: 64px 16px;
+            padding: 24px 0;
+            overflow: hidden;
+            border-radius: var(--frame-radius);
+            box-shadow: var(--frame-shadow);
+        }
+        .frame-inner::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: var(--frame-bg);
+            border-radius: var(--frame-radius);
+            opacity: var(--frame-opacity);
+            z-index: 0;
+        }
+
+        .frame-body {
+            position: relative;
+            z-index: 1;
+            padding: 0 32px;
             text-align: center;
         }
 
@@ -39,13 +114,14 @@
             height: 96px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #23262f;
+            border: 2px solid var(--btn-border);
+            box-shadow: var(--avatar-shadow);
             margin-bottom: 16px;
         }
         .username-name {
             font-size: 16px;
             font-weight: 500;
-            color: #9ca3af;
+            color: var(--ink-muted);
             margin-bottom: 2px;
         }
         .username-main {
@@ -56,12 +132,19 @@
         }
         .bio {
             font-size: 14px;
-            color: #9ca3af;
+            color: var(--ink-muted);
             line-height: 1.5;
         }
 
         /* Адаптив профиля для мобильных */
         @media (max-width: 520px) {
+            .frame-inner {
+                margin: 32px 16px;
+                padding: 8px 0;
+            }
+            .frame-body {
+                padding: 0 16px;
+            }
             .profile {
                 display: flex;
                 align-items: center;
@@ -71,7 +154,7 @@
             }
             .avatar {
                 margin-bottom: 0;
-                margin-left: 16px;
+                margin-left: 0;
                 width: 84px;
                 height: 84px;
                 flex-shrink: 0;
@@ -118,11 +201,11 @@
         .link-btn {
             display: flex;
             align-items: center;
-            background-color: #181920;
-            border: 1px solid #23262f;
+            background-color: var(--btn-bg);
+            border: 1px solid var(--btn-border);
             border-radius: 12px;
             padding: 14px 16px; 
-            color: #ffffff;
+            color: var(--ink);
             text-decoration: none;
             transition: background-color 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
                         border-color 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
@@ -176,7 +259,7 @@
 
         /* Стилизация скрытого (второго) текста */
         .link-btn-text.secondary {
-            color: #ffffff;  
+            color: var(--ink);  
         }
 
         /* Стрелочка */
@@ -191,8 +274,8 @@
 
         /* ЭФФЕКТЫ ХОВЕРА */
         .link-btn:hover {
-            background-color: #1c1d26;
-            border-color: #3b3f4e;
+            background-color: var(--btn-bg-hover);
+            border-color: var(--btn-border-hover);
             transform: scale(1.006); 
         }
 
@@ -212,8 +295,10 @@
 </head>
 <body>
 
-    <div class="container">
-        
+    <div class="frame">
+      <div class="frame-inner">
+        <div class="frame-body">
+
         <div class="profile">
             <img class="avatar" src="avatar.png" alt="dzxbk">
             <div class="profile-text">
@@ -353,6 +438,8 @@
             </a>
         </div>
 
+        </div>
+      </div>
     </div>
 
     <script>
