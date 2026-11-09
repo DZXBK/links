@@ -24,6 +24,7 @@
             --frame-radius: 20px;
             --frame-shadow: 0 4px 10px rgba(0, 0, 0, 0.08),
                             0 14px 56px rgba(0, 0, 0, 0.10);
+            --frame-outline: 0 0 0 1px var(--btn-border);
             --avatar-shadow: 0 1px 3px rgba(0, 0, 0, 0.16),
                              0 3px 8px rgba(0, 0, 0, 0.12);
 
@@ -86,7 +87,7 @@
             padding: 24px 0;
             overflow: hidden;
             border-radius: var(--frame-radius);
-            box-shadow: var(--frame-shadow);
+            box-shadow: var(--frame-outline), var(--frame-shadow);
         }
         .frame-inner::before {
             content: "";
