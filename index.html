@@ -109,6 +109,40 @@
             text-align: center;
         }
 
+        /* Мобильная версия: две отдельные рамки */
+        .cards {
+            display: contents;
+        }
+
+        /* Десктоп: обе части сливаются в одну рамку */
+        @media (min-width: 521px) {
+            .cards {
+                display: flex;
+                flex-direction: column;
+                width: 600px;
+                max-width: 100%;
+                border-radius: var(--frame-radius);
+                box-shadow: var(--frame-outline), var(--frame-shadow);
+            }
+            .cards > .frame-inner {
+                width: 100%;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .cards > .frame-inner::before {
+                border-radius: 0;
+            }
+            .cards > .frame-inner.card-profile {
+                padding-bottom: 8px;
+            }
+            .cards > .frame-inner.card-profile::before {
+                border-radius: var(--frame-radius) var(--frame-radius) 0 0;
+            }
+            .cards > .frame-inner:last-child::before {
+                border-radius: 0 0 var(--frame-radius) var(--frame-radius);
+            }
+        }
+
         /* Профиль (Десктоп) */
         .profile {
             margin-bottom: 0;
@@ -308,6 +342,7 @@
 <body>
 
     <div class="frame">
+      <div class="cards">
       <div class="frame-inner card-profile">
         <div class="frame-body">
 
@@ -417,6 +452,14 @@
                
             </a>
 
+            <a href="https://www.fab.com/sellers/DZXBK" class="link-btn" target="_blank" rel="noopener">
+                <img class="link-btn-img" src="btn-fab.svg" alt="">
+                <div class="link-btn-text-wrapper">
+                    <span class="link-btn-text primary">Fab</span>
+                    <span class="link-btn-text secondary">fab.com/sellers/DZXBK</span>
+                </div>
+            </a>
+
             
 
             <a href="https://www.turbosquid.com/Search/Artists/Dmitrii-Bykov" class="link-btn" target="_blank" rel="noopener">
@@ -457,6 +500,7 @@
         </div>
 
         </div>
+      </div>
       </div>
     </div>
 
