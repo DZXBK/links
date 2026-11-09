@@ -73,18 +73,20 @@
             position: relative;
             z-index: 1;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
             width: 100%;
             min-height: 100vh;
+            padding: 40px 16px;
         }
 
         /* Главная рамка: фон и скругление живут на ::before */
         .frame-inner {
             position: relative;
             width: 600px;
-            max-width: calc(100% - 32px);
+            max-width: 100%;
             min-width: 0;
-            margin: 40px 16px;
             padding: 24px 0;
             overflow: hidden;
             border-radius: var(--frame-radius);
@@ -109,7 +111,7 @@
 
         /* Профиль (Десктоп) */
         .profile {
-            margin-bottom: 32px;
+            margin-bottom: 0;
         }
         .avatar {
             width: 96px;
@@ -140,9 +142,15 @@
 
         /* Адаптив профиля для мобильных */
         @media (max-width: 520px) {
+            .frame {
+                gap: 12px;
+                padding: 16px;
+            }
             .frame-inner {
-                margin: 16px;
                 padding: 8px 0;
+            }
+            .frame-inner.card-profile {
+                padding: 20px 0;
             }
             .frame-body {
                 padding: 0 16px;
@@ -152,7 +160,7 @@
                 align-items: center;
                 text-align: left;
                 gap: 20px;
-                margin-bottom: 28px;
+                margin-bottom: 0;
             }
             .avatar {
                 margin-bottom: 0;
@@ -183,6 +191,9 @@
             -webkit-user-select: none;
             user-select: none;
             transition: color 0.3s ease;
+        }
+        .frame-body > .section-title:first-child {
+            margin-top: 0;
         }
 
         /* Списки кнопок */
@@ -300,7 +311,7 @@
 <body>
 
     <div class="frame">
-      <div class="frame-inner">
+      <div class="frame-inner card-profile">
         <div class="frame-body">
 
         <div class="profile">
@@ -311,6 +322,12 @@
                 <p class="bio">3D Props & Character Artist</p>
             </div>
         </div>
+
+        </div>
+      </div>
+
+      <div class="frame-inner">
+        <div class="frame-body">
 
         <div class="section-title">• How to contact me •</div>
         <div class="links-group">
