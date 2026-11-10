@@ -394,7 +394,7 @@
             <a href="mailto:dzxbk.mail@gmail.com" class="link-btn" id="email-btn">
                 <img class="link-btn-img" src="btn-email.svg" alt="">
                 <div class="link-btn-text-wrapper">
-                    <span class="link-btn-text primary" id="email-label">Contact Email</span>
+                    <span class="link-btn-text primary">Contact Email</span>
                     <span class="link-btn-text secondary">dzxbk.mail@gmail.com</span>
                 </div>
                 <img class="link-btn-arrow" src="arrow.svg" alt="">
@@ -614,7 +614,7 @@
     <script>
         (function () {
             const btn = document.getElementById('email-btn');
-            const label = document.getElementById('email-label');
+            const label = btn && btn.querySelector('.link-btn-text.secondary');
             if (!btn || !label) return;
 
             const EMAIL = 'dzxbk.mail@gmail.com';
