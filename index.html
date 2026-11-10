@@ -391,10 +391,10 @@
 
         <div class="section-title">• How to contact me •</div>
         <div class="links-group">
-            <a href="mailto:dzxbk.mail@gmail.com" class="link-btn">
+            <a href="mailto:dzxbk.mail@gmail.com" class="link-btn" id="email-btn">
                 <img class="link-btn-img" src="btn-email.svg" alt="">
                 <div class="link-btn-text-wrapper">
-                    <span class="link-btn-text primary">Contact Email</span>
+                    <span class="link-btn-text primary" id="email-label">Contact Email</span>
                     <span class="link-btn-text secondary">dzxbk.mail@gmail.com</span>
                 </div>
                 <img class="link-btn-arrow" src="arrow.svg" alt="">
@@ -609,6 +609,58 @@
         document.addEventListener('DOMContentLoaded', updateSectionHighlights);
         
         updateSectionHighlights();
+    </script>
+
+    <script>
+        (function () {
+            const btn = document.getElementById('email-btn');
+            const label = document.getElementById('email-label');
+            if (!btn || !label) return;
+
+            const EMAIL = 'dzxbk.mail@gmail.com';
+            const original = label.textContent;
+            let timer = null;
+
+            function flash(text) {
+                label.textContent = text;
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    label.textContent = original;
+                }, 1600);
+            }
+
+            function legacyCopy() {
+                const ta = document.createElement('textarea');
+                ta.value = EMAIL;
+                ta.setAttribute('readonly', '');
+                ta.style.position = 'fixed';
+                ta.style.top = '-1000px';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                ta.setSelectionRange(0, ta.value.length);
+                try { document.execCommand('copy'); } catch (e) {}
+                document.body.removeChild(ta);
+            }
+
+            function copy() {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(EMAIL).then(
+                        function () { flash('Copied'); },
+                        function () { legacyCopy(); flash('Copied'); }
+                    );
+                } else {
+                    legacyCopy();
+                    flash('Copied');
+                }
+            }
+
+            btn.addEventListener('click', function (e) {
+                const isDesktop = window.matchMedia('(min-width: 521px)').matches;
+                if (isDesktop) e.preventDefault();
+                copy();
+            });
+        })();
     </script>
 
 </body>
