@@ -189,6 +189,15 @@
             .frame-inner .frame-body > .section-title:first-child {
                 margin-top: 4px;
             }
+            .links-grid-4 .link-btn-text-wrapper {
+                display: none;
+            }
+            .links-grid-4 .link-btn-img {
+                margin-right: 0;
+            }
+            .links-grid-4 .link-btn {
+                justify-content: center;
+            }
             .profile {
                 display: flex;
                 align-items: center;
@@ -244,6 +253,18 @@
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 12px;
             margin-bottom: 12px;
+        }
+
+        /* Компактный режим: 4 кнопки в ряд */
+        .links-grid-4 {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 8px;
+        }
+        .links-grid-4 .link-btn {
+            padding: 14px 6px 14px 16px;
+        }
+        .links-grid-4 .link-btn-img {
+            margin-right: 6px;
         }
 
         /* Кнопка-ссылка */
@@ -468,7 +489,7 @@
         </div>
 
         <div class="section-title">• Other Socials •</div>
-        <div class="links-grid">
+        <div class="links-grid links-grid-4">
             <a href="https://t.me/dzxbk_art" class="link-btn" target="_blank" rel="noopener">
                 <img class="link-btn-img" src="btn-tg.svg" alt="">
                 <div class="link-btn-text-wrapper">
