@@ -383,12 +383,15 @@
             opacity: 0.3;
         }
 
-        /* ===== СНЕГ (под главной рамкой) ===== */
+        /* ===== СНЕГ (под главной рамкой, только декабрь–февраль) ===== */
         .snow {
             position: fixed;
             inset: 0;
             z-index: 0;              /* ниже .frame (z-index: 1) */
             pointer-events: none;
+        }
+        .snow--off {
+            display: none;
         }
         .snowflake {
             position: absolute;
@@ -718,11 +721,20 @@
         })();
     </script>
 
-    <!-- ===== СНЕГ ===== -->
+    <!-- ===== СНЕГ (только декабрь–февраль) ===== -->
     <script>
         (function () {
             const container = document.getElementById('snow');
             if (!container) return;
+
+            // Месяцы: 11 = декабрь, 0 = январь, 1 = февраль
+            const month = new Date().getMonth();
+            const isWinter = (month === 11 || month === 0 || month === 1);
+
+            if (!isWinter) {
+                container.classList.add('snow--off');
+                return;
+            }
 
             const COUNT = window.innerWidth < 521 ? 30 : 55;
             const frag = document.createDocumentFragment();
