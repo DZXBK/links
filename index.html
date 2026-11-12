@@ -114,7 +114,7 @@
             display: contents;
         }
 
-        /* Десктоп: обе части сливаются в одну рамку */
+        /* Десктоп: обе части сливаются в одну рамку + АНИМАЦИЯ ПОЯВЛЕНИЯ */
         @media (min-width: 521px) {
             .cards {
                 display: flex;
@@ -123,7 +123,24 @@
                 max-width: 100%;
                 border-radius: var(--frame-radius);
                 box-shadow: var(--frame-outline), var(--frame-shadow);
+
+                /* Плавное появление и лёгкий подъём */
+                opacity: 0;
+                transform: translateY(12px);
+                animation: revealFrame 0.7s cubic-bezier(0.2, 0.9, 0.25, 1) 0.1s forwards;
             }
+
+            @keyframes revealFrame {
+                0% {
+                    opacity: 0;
+                    transform: translateY(12px) scale(0.995);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+
             .cards > .frame-inner {
                 width: 100%;
                 border-radius: 0;
@@ -365,9 +382,47 @@
         .link-btn:hover .link-btn-arrow {
             opacity: 0.3;
         }
+
+        /* ===== СНЕГ (под главной рамкой) ===== */
+        .snow {
+            position: fixed;
+            inset: 0;
+            z-index: 0;              /* ниже .frame (z-index: 1) */
+            pointer-events: none;
+        }
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            line-height: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0) 70%);
+            opacity: 0.85;
+            animation-name: snowFall;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            will-change: transform;
+        }
+        @keyframes snowFall {
+            0% {
+                transform: translate3d(0, -10vh, 0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translate3d(var(--drift, 20px), 110vh, 0) rotate(360deg);
+                opacity: 0.9;
+            }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Снег -->
+    <div class="snow" id="snow" aria-hidden="true"></div>
 
     <div class="frame">
       <div class="cards">
@@ -660,6 +715,41 @@
                 if (isDesktop) e.preventDefault();
                 copy();
             });
+        })();
+    </script>
+
+    <!-- ===== СНЕГ ===== -->
+    <script>
+        (function () {
+            const container = document.getElementById('snow');
+            if (!container) return;
+
+            const COUNT = window.innerWidth < 521 ? 30 : 55;
+            const frag = document.createDocumentFragment();
+
+            for (let i = 0; i < COUNT; i++) {
+                const flake = document.createElement('span');
+                flake.className = 'snowflake';
+
+                const size = Math.random() * 4 + 2; // 2–6 px
+                const left = Math.random() * 100;
+                const duration = Math.random() * 6 + 6; // 6–12 s
+                const delay = Math.random() * -12; // уже "в полёте"
+                const drift = (Math.random() * 80 - 40).toFixed(1) + 'px';
+                const opacity = (Math.random() * 0.5 + 0.4).toFixed(2);
+
+                flake.style.width = size + 'px';
+                flake.style.height = size + 'px';
+                flake.style.left = left + '%';
+                flake.style.opacity = opacity;
+                flake.style.setProperty('--drift', drift);
+                flake.style.animationDuration = duration + 's';
+                flake.style.animationDelay = delay + 's';
+
+                frag.appendChild(flake);
+            }
+
+            container.appendChild(frag);
         })();
     </script>
 
